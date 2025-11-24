@@ -1,0 +1,495 @@
+#import "template.typ": *
+
+#set document(title: [Network Peering Request])
+
+#set page(
+  paper: "a4",
+  margin: (x: 0.8cm, y: 0.8cm, top: 3cm),
+  header: context [
+    #grid(
+      columns: (1fr, auto, 1fr),
+      align: (left, center, right),
+      [[Page #counter(page).display()]], title(), [( Version #version )],
+    )
+    #align(center)[Only used for *#ownas.join("/")*]
+  ],
+  background: [
+    #if preview [
+      #rotate(24deg,[
+        #text(128pt, fill: rgb("CCCCCC"))[*PREVIEW*]
+        #text(48pt, fill: rgb("CCCCCC"))[*Not For Production*]
+      ])
+    ]
+  ]
+)
+
+#set text(font: globalfont, size: textnormal, lang: "en")
+
+#section-header("Registry")
+#titleframe(
+  title: "Internet Registry",
+  subtitle: "(If you need to select both, please submit two forms)",
+)[
+  #grid(
+    columns: (3fr, 1fr),
+    check[*DN42 / NeoNetwork / ICVPN / ChaosVPN / CRXN*], check[*IANA*],
+  )
+]
+
+#text(weight: "bold")[Fill Your ASN]
+#grid(
+  columns: (auto, auto, 1fr),
+  gutter: linegutter,
+  align: horizon,
+  text(size: 14pt, weight: "bold")[AS],
+  char-box(10, size: charboxlarge, border: heavyborder),
+  align(left + horizon, check[Tick if your ASN is 2-byte]),
+)
+
+#section-header("Location")
+#frame(stroke: heavyborder)[
+  #grid(
+    columns: (auto, 1fr),
+    row-gutter: linegutter,
+    column-gutter: linegutter,
+
+    [*Region*:],
+    grid(
+      columns: (auto, auto, auto, auto, auto, auto, 1fr),
+      gutter: linegutter,
+      check[*APAC*],
+      check[*EMEA*],
+      check[*NA*],
+      check[*SA*],
+      check[*AQ*],
+      check[Others: #underline-field()],
+    ),
+
+    [*Node to Peer*:],
+    grid(
+      columns: (1fr, auto),
+      gutter: linegutter,
+      check[#underline-field()], check[I don't know],
+    ),
+
+    [*Location of Your Router*:],
+    grid(
+      columns: (1fr, auto),
+      gutter: linegutter,
+      stack(
+        dir: ttb,
+        spacing: 2pt,
+        check[#underline-field()],
+        text(
+          size: textexsmall,
+        )[(City, Country / Maidenhead Grid / Lat, Lng / Ingress Cell)],
+      ),
+      check[Virtual / Inapplicable],
+    ),
+  )
+]
+
+#section-header("Connection")
+#titleframe(title: "Type of Connection Medium")[
+  #grid(
+    columns: (1fr, 1fr, 1fr),
+    gutter: linegutter,
+    check[*Physical* (Twisted-pair)],
+    check[*Physical* (Fiber-optical)],
+    check[*Physical* (Coaxial)],
+    check[*Physical* (Wireless)],
+    check[*Virtual* (Tunnel)], 
+    check[*Other*: #underline-field()],
+  )
+]
+
+#titleframe(
+  title: "Type of Extra Connection Options",
+  subtitle: "(Leave blank if there is no additional information to be provided)",
+)[
+  #grid(
+    columns: (1fr, 1fr),
+    gutter: linegutter,
+    check[Via hosted device: #underline-field()],
+    check[Via Existing Connection: #underline-field()],
+
+    check[Via Internet eXchange: #underline-field()],
+    check[Via Local Network: #underline-field()],
+
+    check[Via Virtual Machine: #underline-field()],
+    check[Other: #underline-field()],
+  )
+  #grid(
+    columns: (1fr, 0.4fr),
+    gutter: linegutter
+  )[
+      Estimated max bandwidth (if known): \
+      #check[#sym.lt.eq.slant 10Mbps]
+      #check[#sym.tilde.basic 100Mbps]
+      #check[#sym.tilde.basic 1Gbps]
+      #check[#sym.tilde.basic 10Gbps]
+      #check[#sym.gt.eq.slant 100Gbps] \
+      #check[Others: #underline-field()]
+  ][
+    #text(size: textexsmall, style: "italic")[(If there is not enough free space,
+    please write it in the appendix)]
+  ]
+]
+
+#titleframe(
+  title: "Medium Options",
+  subtitle: "(Leave blank if there is no additional information to be provided)",
+)[
+  #text(weight: "bold")[#check[Wireguard]]
+  #grid(
+    columns: (auto, 1fr, auto, auto, auto, auto),
+    gutter: linegutter,
+    check[Endpoint: #underline-field() : #char-box(5)],
+    h(5pt),
+    grid(
+      columns: (auto, auto),
+      gutter: linegutter,
+      check[Use Dynamic DNS], check[No Public IP Available],
+    ),
+  )
+  #grid(
+    columns: (auto, auto),
+    gutter: linegutter,
+    [Public Key:], check[Download my key from: (or fill the blanks above) #underline-field()],
+  )
+  #check[Use the given key:]
+
+  #char-box(44)
+  #grid(
+    columns: (auto, auto, 1fr),
+    gutter: linegutter,
+    check[Preshared Key:], check[Download my key from: #underline-field()],
+  )
+  #check[Use the given key:]
+
+  #char-box(44)
+  #grid(
+    columns: (auto, auto),
+    gutter: linegutter,
+    [Options:],
+    [Host Resolution: #text(size: textsmall)[(if hostname is used in endpoint)]],
+
+    check[Enable persistent keepalive: (seconds) #char-box(3)],
+    grid(
+      columns: (auto, auto),
+      gutter: linegutter,
+      check[Prefer IPv6], check[Prefer IPv4],
+    ),
+  )
+
+  #line(length: 100%, stroke: heavyborder)
+
+  #text(weight: "bold")[#check[Zerotier]]
+  #grid(
+    columns: (1fr, auto, auto),
+    gutter: linegutter,
+    align: bottom,
+    check[Use Network ID generated by you.], [Network ID: #char-box(16)],
+  )
+  #grid(
+    columns: (1fr, auto, auto),
+    gutter: linegutter,
+    align: bottom,
+    check[Use Network ID generated by us.], [Device ID: #char-box(10)],
+  )
+
+  #line(length: 100%, stroke: heavyborder)
+
+  #text(weight: "bold")[#check[Generic Routing Encapsulation (GRE / GRE6)]]
+  #grid(
+    columns: (auto, auto),
+    gutter: linegutter,
+    align: horizon,
+    [Endpoint: #check[#underline-field() : #char-box(5)]],
+    check[Use Dynamic DNS],
+  )
+  #grid(
+    columns: (auto, 10pt, auto, 10pt, auto),
+    align: horizon,
+    [Host Resolution: #text(size: textsmall)[(if hostname is used in endpoint)]],
+    h(5pt),
+    check[Prefer IPv6],
+    h(5pt),
+    check[Prefer IPv4],
+  )
+
+  #v(textnormal)
+  #line(length: 100%, stroke: lightborder)
+
+  #line(length: 100%, stroke: heavyborder)
+
+  #text(weight: "bold")[#check[Others]] (if configuration is needed):
+  #stack(
+    dir: ttb,
+    spacing: 2pt,
+    v(textnormal),
+    underline-field(),
+    align(right)[
+      #text(
+      size: textexsmall,
+      style: "italic",
+    )[(Please put configurations in the appendix)]
+    ],
+  )
+]
+
+#titleframe(title: "Addressing Options")[
+  #grid(
+    columns: (1fr, 2fr),
+    gutter: linegutter,
+    stroke: (x, y) => if x == 0 { (right: 1.5pt) } else { none },
+    // IPv4 Column
+    [
+      #text(weight: "bold")[#check[IPv4]]
+      #grid(
+        columns: (auto, 1fr),
+        gutter: linegutter,
+        text(weight: "bold")[Addressing:], check[Peer-to-peer],
+      )
+      #grid(
+        columns: (auto, auto),
+        gutter: linegutter,
+        align: left,
+        [Address], [Length],
+        ipv4-box(width: 125pt), [#text(size: textnormal * 2)[/] #char-box(2)],
+      )
+    ],
+    // IPv6 Column
+    [
+      #text(weight: "bold")[#check[IPv6]]
+      #grid(
+        columns: (auto, auto, 1fr),
+        gutter: linegutter,
+        text(weight: "bold")[Addressing:],
+        check[Link-local addressing],
+        check[Peer-to-peer],
+      )
+      #grid(
+        columns: (auto, auto),
+        gutter: linegutter,
+        align: left,
+        [Address], [Length],
+        ipv6-box(width: 300pt), [#text(size: textnormal * 2)[/] #char-box(3)],
+      )
+    ],
+  )
+]
+
+#section-header("BGP Session")
+
+#grid(
+  columns: (1fr, 3fr),
+  gutter: linegutter,
+  stack(
+    spacing: linegutter,
+
+    // Protocols
+    titleframe(title: "Protocols")[
+      #grid(
+        columns: (auto, 1fr, 1fr),
+        row-gutter: linegutter,
+        align: center,
+        [], [*IPv4*], [*IPv6*],
+        [*Unicast*], align(center, check[]), align(center, check[]),
+        [*Multicast*], align(center, check[]), align(center, check[]),
+      )
+      #grid.cell(colspan: 3, check[Others:])
+      #v(textnormal)
+      #line(length: 100%, stroke: lightborder)
+      #v(textnormal)
+      #line(length: 100%, stroke: lightborder)
+    ],
+
+    // Downstream ASNs
+    titleframe(title: "Downstream ASNs")[
+      #check[I have downstreams: #text(size: textexsmall)[(Validation may be required)]]
+      #for i in range(5) {
+        v(textnormal)
+        line(length: 100%, stroke: lightborder)
+      }
+      #text(
+        size: textexsmall,
+      )[(If there is not enough free space, please write it in the appendix)]
+    ],
+
+    titleframe(title: "PeeringDB", subtitle: "(IANA Only)")[
+      #check[Update peering info in _peeringdb.com_.]
+    ],
+  ),
+
+  stack(
+    spacing: linegutter,
+
+    stack(
+      grid(
+        columns: (auto, 1fr),
+        gutter: linegutter,
+        text(weight: "bold")[Session Type],
+        text(size: textsmall)[(Select *Your* role)],
+      ),
+      spacing: linegutter,
+      [
+        #let cell-content(title, desc) = {
+          pad(tableinset)[
+            #text(weight: "bold")[#check(title)] \
+            #text(size: textexsmall)[#desc]
+          ]
+        }
+
+        #grid(
+          columns: (1fr, 1fr, 1fr, 1fr),
+          stroke: heavyborder,
+          cell-content("Full-table \n(DN42 Only)", [
+            We:\
+            Send *all* our valid routes.\
+            Receive *all* your valid routes.\
+            Send your valid routes to:\
+            - Full-table peers\
+            - Downstream peers
+          ]),
+          cell-content("Transit", [
+            We:\
+            Send our valid *self and downstream* routes.\
+            Receive *all* your valid routes.\
+            Send your valid routes to:\
+            - Full-table peers\
+            - Downstream peers
+          ]),
+          cell-content("Peer", [
+            We:\
+            Send our valid *self and downstream* routes.\
+            Receive your valid *self and downstream* routes.\
+            Send your valid routes to:\
+            - Full-table peers\
+            - Downstream peers
+          ]),
+          cell-content("Downstream", [
+            We:\
+            Send *all* our valid routes.\
+            Receive your valid *self and downstream* routes.\
+            Send your valid routes to:\
+            - Full-table peers\
+            - Transit peers\
+            - Downstream peers
+          ]),
+          cell-content("Route Feed", [
+            We receive *no* routes.\
+            *Multihop* BGP is enabled.
+          ]),
+          grid.cell(
+            colspan: 3,
+            pad(tableinset)[
+              #check("Private Session") \
+              #text(
+                size: textexsmall,
+              )[We'll never send your routes to other BGP sessions. (no-export).] \
+              #check("Import-only Session") \
+              #text(size: textexsmall)[We'll never send any routes to you.]
+            ],
+          ),
+        )
+      ],
+    ),
+
+    titleframe(title: "Security")[
+      #grid(
+        columns: auto,
+        row-gutter: linegutter,
+        check[Set MD5 password for BGP session: #underline-field()],
+        check[Change import limit of routes to: #text(size: textexsmall)[(default: 10K for DN42, 10M for IANA)] #underline-field()],
+      )
+      #check[Disable RPKI/RoA check. #text(size: textsmall)[(You *must* explain why it is necessary in the appendix.)]]
+    ],
+
+    titleframe(title: "Optional Features")[
+      #grid(
+        columns: (0.8fr, 1fr, 1fr),
+        row-gutter: linegutter,
+        align: (left, left, left),
+
+        text(weight: "bold")[Extended Next Hop:],
+        check[Enable (IPv4 over IPv6)],
+        check[Enable (IPv6 over IPv4)],
+
+        text(weight: "bold")[Multiprotocol:],
+        grid.cell(
+          colspan: 2,
+          check[Disable (Enabled by default if you have both IPv4 and IPv6 protocols enabled)],
+        ),
+
+        text(weight: "bold")[Passive BGP session:],
+        check[Enabled at our side],
+        check[Enabled at your side],
+      )
+    ],
+  ),
+)
+
+#section-header("Contacts")
+#grid(
+  columns: (1fr, 1fr, 1fr, 1fr),
+  stroke: heavyborder,
+  inset: tableinset,
+  [*Email Address:* (required)],
+  [],
+  [*#check[Telephone]*],
+  [],
+  [*#check[Instant Messaging]*],
+  [],
+  [*#check[Other: #underline-field()]*],
+  [],
+)
+
+#section-header("Confirmation")
+#frame[
+  #text[(You *must* read, acknowledge and tick *ALL* the items)] \
+  #text(size: textsmall)[
+    #check[I have confirmed that I have the right to manage the above mentioned autonomous system and network resources and that the above information has been *filled in correctly*.] \
+    #check[I am aware that this BGP session is based on the *Best Effort principle* and *does NOT guarantee connection stability and availability*, and that I will *be responsible for any consequence* caused by the failure of this BGP session.] \
+    #check[I will *NOT* arbitrarily *block, interfere, discriminate, obstruct or restrict* the right of *ANY* user to use, send, receive or offer any content, application or legal service over this connection.]
+  ]
+  #v(linegutter)
+  #grid(
+    columns: (1fr, auto),
+    align: (left, right),
+    text(weight: "bold")[Signature:],
+    v(60pt),
+    [
+      #set align(right)
+      Date of Request:
+      #h(linegutter)
+      #date-box()
+    ],
+  )
+]
+
+#section-header("Result (This field is to be completed by the reviewer)")
+
+#frame[
+  #grid(
+    columns: (1fr, 1fr, 1fr),
+    text(weight: "bold")[#check[Peering Accepted]],
+    text(weight: "bold")[#check[Peering Onhold]],
+    text(weight: "bold")[#check[Peering Rejected]],
+  )
+  #line(length: 100%, stroke: lightborder)
+  *Extra Message:*
+  #v(60pt)
+  #align(right)[
+    Date of Reply:
+    #h(linegutter)
+    #date-box()
+  ]
+]
+
+#footer
+
+#place(
+  bottom + center,
+  text(size: textsmall, weight: "bold")[ [End of Document] ]
+)
