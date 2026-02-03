@@ -7,7 +7,7 @@ A printable peering form built using [Typst](https://typst.app/).
 ### Requirements
 
 - typst
-- font: IBM Plex Sans
+- font: IBM Plex Sans (or put in `fonts/`)
 
 ### Customize
 

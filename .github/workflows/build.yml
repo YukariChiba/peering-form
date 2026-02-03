@@ -20,10 +20,20 @@ jobs:
           sed -i 's/#let preview = true/#let preview = false/g' variable.typ
           grep "#let preview" variable.typ
 
+      - name: Download Fonts
+        run: |
+          mkdir fonts /tmp/ibm-plex-sans
+          wget https://github.com/IBM/plex/releases/download/%40ibm%2Fplex-sans%401.1.0/ibm-plex-sans.zip -O /tmp/fonts.zip
+          unzip /tmp/fonts.zip -d /tmp
+          mv /tmp/ibm-plex-sans/fonts/complete/ttf/*.ttf fonts/
+
       - name: Build Typst
         uses: lvignoli/typst-action@main
         with:
           source_file: index.typ
+          options: |
+            --font-path
+            fonts
 
       - name: Create Pre-release
         if: startsWith(github.ref, 'refs/tags/')
