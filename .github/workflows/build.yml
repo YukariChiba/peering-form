@@ -44,3 +44,9 @@ jobs:
           draft: false
           generate_release_notes: true
           fail_on_unmatched_files: true
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: index.pdf
+          path: index.pdf
