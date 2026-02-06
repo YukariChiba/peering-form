@@ -11,7 +11,7 @@
 #let linegutter = 8pt;
 #let tableinset = 8pt;
 
-#let version = "1.2.2 / Typst"
+#let version = "1.2.3 / Typst"
 
 #let ownas = ("AS4242421331", "AS4242421332", "AS4242420803", "AS207268")
 
@@ -20,10 +20,9 @@
 #let preview = true
 
 #let footer = [
-  #box(width: 100%, fill: rgb("#DDDDDD"), inset: 10pt)[
-  Please return completed form to:
-    - *+1-424-242-9915* (Fax on PSTN) / *+424-0-0803-4001* (Fax on Telephony42)
-    - *peering\@strexp.net* (IANA Global Network) / *peering\@nia.dn42* (DN42 Global Network)
-    - *peering\@gensokyo.dn42* (DN42 China Network)
+  #box(width: 100%, fill: rgb("#f1f1f1"), inset: 10pt)[
+    Please return completed form to: \
+    *Fax (PSTN):* +1-424-242-9915 #h(1em) *Fax (Telephony42):* +424-0-0803-4001 \
+    *IANA Global:* peering\@strexp.net #h(1em) *DN42 Global:* peering\@nia.dn42 #h(1em) *DN42 China:* peering\@gensokyo.dn42
   ]
 ]

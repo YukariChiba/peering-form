@@ -82,20 +82,9 @@
 #let ipv4-box(width: 100%) = {
   box(width: width, height: ip-box-height-long, stroke: (bottom: heavyborder, left: heavyborder, right: heavyborder))[
     #grid(
-        columns: 12,
-        align: bottom + center,
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
+      columns: 12,
+      align: bottom + center,
+      ..range(12).map(i => if calc.rem(i, 3) == 0 { ip-box-seg-long() } else { ip-box-seg-short() })
     )
   ]
 }
@@ -103,40 +92,9 @@
 #let ipv6-box(width: 100%) = {
   box(width: width, height: ip-box-height-long, stroke: (bottom: heavyborder, left: heavyborder, right: heavyborder))[
     #grid(
-        columns: 32,
-        align: bottom + center,
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-long(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
-        ip-box-seg-short(),
+      columns: 32,
+      align: bottom + center,
+      ..range(32).map(i => if calc.rem(i, 4) == 0 { ip-box-seg-long() } else { ip-box-seg-short() })
     )
   ]
 }
