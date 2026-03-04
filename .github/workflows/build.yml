@@ -27,10 +27,18 @@ jobs:
           unzip /tmp/fonts.zip -d /tmp
           mv /tmp/ibm-plex-sans/fonts/complete/ttf/*.ttf fonts/
 
-      - name: Build Typst
+      - name: Build Typst (index)
         uses: lvignoli/typst-action@main
         with:
           source_file: index.typ
+          options: |
+            --font-path
+            fonts
+
+      - name: Build Typst (telephony)
+        uses: lvignoli/typst-action@main
+        with:
+          source_file: telephony.typ
           options: |
             --font-path
             fonts
@@ -39,14 +47,24 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          files: index.pdf
+          files: |
+              index.pdf
+              telephony.pdf
           prerelease: true
           draft: false
           generate_release_notes: true
           fail_on_unmatched_files: true
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v6
+      - name: Upload artifact (index)
+        uses: actions/upload-artifact@v7
         with:
           name: index.pdf
           path: index.pdf
+          archive: false
+
+      - name: Upload artifact (telephony)
+        uses: actions/upload-artifact@v7
+        with:
+          name: telephony.pdf
+          path: telephony.pdf
+          archive: false
