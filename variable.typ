@@ -18,7 +18,8 @@
 #let ownprefix = (
   (
     title: [Main PBX \@ wh1.cn],
-    prefixes: (42400803, 42401332)
+    prefixes: (42400803, 42401331),
+    description: "(E.164 configured @ e164.dn42)"
   ),
 )
 

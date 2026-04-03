@@ -59,9 +59,20 @@
     align: horizon,
     char-box(14, size: charboxlarge, border: heavyborder), text(size: 12pt)[\+ Your Extensions]
   ),
-  align(left + horizon, check[Tick if E.164 is configured for your prefix(es) (currently NOT supported in Telephony42, see DN42 maillist for details)]),
   [#text(size: textsmall)[Additional Prefixes (if any):] #underline-field()]
 )
+
+#titleframe(
+  title: "E.164 ENUM",
+  subtitle: "(When ENUM is enabled, this form is ONLY applicable if additional authentication is required)",
+)[
+  #grid(
+    columns: (1fr),
+    row-gutter: linegutter,
+    align(left + horizon, check[Tick if E.164 is configured for your prefix(es) via e164.dn42]),
+    align(left + horizon, check[Tick if E.164 is configured for your prefix(es) via custom domain: #underline-field()])
+  )
+]
 
 #section-header("Peer Target")
 #frame(stroke: heavyborder)[
@@ -72,7 +83,14 @@
       stack(
         spacing: linegutter,
         check[*#v.title*],
-        pad(left: 15pt, text(size: textnormal)[Prefixes: #v.prefixes.map(vv => str(vv)).join(", ")])
+        pad(
+          left: 15pt,
+          text(size: textnormal)[Prefixes: #v.prefixes.map(vv => str(vv)).join(", ")]
+        ),
+        pad(
+          left: 15pt,
+          text(size: textnormal)[#v.description]
+        )
       )
     )
   )
