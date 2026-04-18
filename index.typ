@@ -15,12 +15,12 @@
   ],
   background: [
     #if preview [
-      #rotate(24deg,[
+      #rotate(24deg, [
         #text(128pt, fill: rgb("CCCCCC"))[*PREVIEW*]
         #text(48pt, fill: rgb("CCCCCC"))[*Not For Production*]
       ])
     ]
-  ]
+  ],
 )
 
 #set text(font: globalfont, size: textnormal, lang: "en")
@@ -57,12 +57,7 @@
     grid(
       columns: (auto, auto, auto, auto, auto, auto, 1fr),
       gutter: linegutter,
-      check[*APAC*],
-      check[*EMEA*],
-      check[*NA*],
-      check[*SA*],
-      check[*AQ*],
-      check[Others: #underline-field()],
+      check[*APAC*], check[*EMEA*], check[*NA*], check[*SA*], check[*AQ*], check[Others: #underline-field()],
     ),
 
     [*Node to Peer*:],
@@ -94,12 +89,8 @@
   #grid(
     columns: (1fr, 1fr, 1fr),
     gutter: linegutter,
-    check[*Physical* (Twisted-pair)],
-    check[*Physical* (Fiber-optical)],
-    check[*Physical* (Coaxial)],
-    check[*Physical* (Wireless)],
-    check[*Virtual* (Tunnel)], 
-    check[*Other*: #underline-field()],
+    check[*Physical* (Twisted-pair)], check[*Physical* (Fiber-optical)], check[*Physical* (Coaxial)],
+    check[*Physical* (Wireless)], check[*Virtual* (Tunnel)], check[*Other*: #underline-field()],
   )
 ]
 
@@ -110,29 +101,26 @@
   #grid(
     columns: (1fr, 1fr),
     gutter: linegutter,
-    check[Via hosted device: #underline-field()],
-    check[Via Existing Connection: #underline-field()],
+    check[Via hosted device: #underline-field()], check[Via Existing Connection: #underline-field()],
 
-    check[Via Internet eXchange: #underline-field()],
-    check[Via Local Network: #underline-field()],
+    check[Via Internet eXchange: #underline-field()], check[Via Local Network: #underline-field()],
 
-    check[Via Virtual Machine: #underline-field()],
-    check[Other: #underline-field()],
+    check[Via Virtual Machine: #underline-field()], check[Other: #underline-field()],
   )
   #grid(
     columns: (1fr, 0.4fr),
     gutter: linegutter
   )[
-      Estimated max bandwidth (if known): \
-      #check[#sym.lt.eq.slant 10Mbps]
-      #check[#sym.tilde.basic 100Mbps]
-      #check[#sym.tilde.basic 1Gbps]
-      #check[#sym.tilde.basic 10Gbps]
-      #check[#sym.gt.eq.slant 100Gbps] \
-      #check[Others: #underline-field()]
+    Estimated max bandwidth (if known): \
+    #check[#sym.lt.eq.slant 10Mbps]
+    #check[#sym.tilde.basic 100Mbps]
+    #check[#sym.tilde.basic 1Gbps]
+    #check[#sym.tilde.basic 10Gbps]
+    #check[#sym.gt.eq.slant 100Gbps] \
+    #check[Others: #underline-field()]
   ][
     #text(size: textexsmall, style: "italic")[(If there is not enough free space,
-    please write it in the appendix)]
+      please write it in the appendix)]
   ]
 ]
 
@@ -171,8 +159,7 @@
   #grid(
     columns: (auto, auto),
     gutter: linegutter,
-    [Options:],
-    [Host Resolution: #text(size: textsmall)[(if hostname is used in endpoint)]],
+    [Options:], [Host Resolution: #text(size: textsmall)[(if hostname is used in endpoint)]],
 
     check[Enable persistent keepalive: (seconds) #char-box(3)],
     grid(
@@ -205,8 +192,7 @@
     columns: (auto, auto),
     gutter: linegutter,
     align: horizon,
-    [Endpoint: #check[#underline-field() : #char-box(5)]],
-    check[Use Dynamic DNS],
+    [Endpoint: #check[#underline-field() : #char-box(5)]], check[Use Dynamic DNS],
   )
   #grid(
     columns: (auto, 10pt, auto, 10pt, auto),
@@ -231,9 +217,9 @@
     underline-field(),
     align(right)[
       #text(
-      size: textexsmall,
-      style: "italic",
-    )[(Please put configurations in the appendix)]
+        size: textexsmall,
+        style: "italic",
+      )[(Please put configurations in the appendix)]
     ],
   )
 ]
@@ -265,9 +251,7 @@
       #grid(
         columns: (auto, auto, 1fr),
         gutter: linegutter,
-        text(weight: "bold")[Addressing:],
-        check[Link-local addressing],
-        check[Peer-to-peer],
+        text(weight: "bold")[Addressing:], check[Link-local addressing], check[Peer-to-peer],
       )
       #grid(
         columns: (auto, auto),
@@ -329,8 +313,7 @@
       grid(
         columns: (auto, 1fr),
         gutter: linegutter,
-        text(weight: "bold")[Session Type],
-        text(size: textsmall)[(Select *Your* role)],
+        text(weight: "bold")[Session Type], text(size: textsmall)[(Select *Your* role)],
       ),
       spacing: linegutter,
       [
@@ -435,14 +418,8 @@
   columns: (1fr, 1fr, 1fr, 1fr),
   stroke: heavyborder,
   inset: tableinset,
-  [*Email Address:* (required)],
-  [],
-  [*#check[Telephone]*],
-  [],
-  [*#check[Instant Messaging]*],
-  [],
-  [*#check[Other: #underline-field()]*],
-  [],
+  [*Email Address:* (required)], [], [*#check[Telephone]*], [],
+  [*#check[Instant Messaging]*], [], [*#check[Other: #underline-field()]*], [],
 )
 
 #section-header("Confirmation")
@@ -457,11 +434,10 @@
   #grid(
     columns: (1fr, auto),
     align: (left, right),
-    text(weight: "bold")[Signature:],
-    v(60pt),
+    text(weight: "bold")[Signature:], v(60pt),
     [
       #set align(right)
-      Date of Request:
+      Date of Request #text(size: textexsmall)[(YYYY/MM/DD)]:
       #h(linegutter)
       #date-box()
     ],
@@ -481,7 +457,7 @@
   *Extra Message:*
   #v(60pt)
   #align(right)[
-    Date of Reply:
+    Date of Reply #text(size: textexsmall)[(YYYY/MM/DD)]:
     #h(linegutter)
     #date-box()
   ]
@@ -491,5 +467,5 @@
 
 #place(
   bottom + center,
-  text(size: textsmall, weight: "bold")[ [End of Document] ]
+  text(size: textsmall, weight: "bold")[ [End of Document] ],
 )
