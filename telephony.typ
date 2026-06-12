@@ -1,31 +1,10 @@
 #import "template.typ": *
+#show: apply-template.with(formcode: "420T")
 
 #set document(title: [Telephony Peering Request])
 
-#set page(
-  paper: "a4",
-  margin: (x: 0.8cm, y: 0.8cm, top: 3cm),
-  header: context[
-    #grid(
-      columns: (1fr, auto, 1fr),
-      align: (left, center, right),
-      [[Page #counter(page).display()]], title(), [( Version #version )],
-    )
-    #align(center)[Only used for *#ownas.join("/")*]
-  ],
-  background: [
-    #if preview [
-      #rotate(24deg,[
-        #text(128pt, fill: rgb("CCCCCC"))[*PREVIEW*]
-        #text(48pt, fill: rgb("CCCCCC"))[*Not For Production*]
-      ])
-    ]
-  ]
-)
+= System & Numbering
 
-#set text(font: globalfont, size: textnormal, lang: "en")
-
-#section-header("System & Numbering")
 #titleframe(
   title: "Telephony System",
   subtitle: "(If you need to select both, please submit two forms)",
@@ -43,23 +22,24 @@
   #grid(
     columns: 1fr,
     gutter: linegutter,
-    check[*Telephony42 Standard Draft* (e.g., 424 + Network ID + ASN Last 4 digits)],
+    check[*Telephony42 Standard Draft* (+042-N-XXXX)],
+    check[*e164.dn42 (Will Deprecate Soon)* (424 + Network ID + ASN Last 4 digits)],
     check[*Others / Custom Plan*: #underline-field()],
   )
 ]
 
 #text(weight: "bold")[Fill Your Prefix(es)]
 #grid(
-  columns: (auto),
+  columns: auto,
   gutter: linegutter,
   align: horizon,
   grid(
     columns: (auto, auto),
     gutter: linegutter,
     align: horizon,
-    char-box(14, size: charboxlarge, border: heavyborder), text(size: 12pt)[\+ Your Extensions]
+    char-box(14, size: charboxlarge, border: heavyborder), text(size: 12pt)[\+ Your Extensions],
   ),
-  [#text(size: textsmall)[Additional Prefixes (if any):] #underline-field()]
+  [#text(size: textsmall)[Additional Prefixes (if any):] #underline-field()],
 )
 
 #titleframe(
@@ -67,45 +47,46 @@
   subtitle: "(When ENUM is enabled, this form is ONLY applicable if additional authentication is required)",
 )[
   #grid(
-    columns: (1fr),
+    columns: 1fr,
     row-gutter: linegutter,
-    align(left + horizon, check[Tick if E.164 is configured for your prefix(es) via e164.dn42]),
+    align(left + horizon, grid(
+      columns: (auto, auto),
+      gutter: linegutter,
+      [Tick if E.164 is configured for your prefix(es) via:], check[e164.dn42],
+    )),
     align(left + horizon, check[Tick if E.164 is configured for your prefix(es) via custom domain: #underline-field()])
   )
 ]
 
-#section-header("Peer Target")
+= Peer Target
+
 #frame(stroke: heavyborder)[
   #grid(
     columns: (1fr, 1fr),
     row-gutter: linegutter,
-    ..ownprefix.map(v => 
-      stack(
-        spacing: linegutter,
-        check[*#v.title*],
-        pad(
-          left: 15pt,
-          text(size: textnormal)[Prefixes: #v.prefixes.map(vv => str(vv)).join(", ")]
-        ),
-        pad(
-          left: 15pt,
-          text(size: textnormal)[#v.description]
-        )
-      )
-    )
+    ..ownprefix.map(v => stack(
+      spacing: linegutter,
+      check[*#v.title*],
+      pad(
+        left: 15pt,
+        text(size: textnormal)[Prefixes: #v.prefixes.map(vv => str(vv)).join(", ")],
+      ),
+      pad(
+        left: 15pt,
+        text(size: textnormal)[#v.description],
+      ),
+    ))
   )
 ]
 
-#section-header("Connection & Transport")
+= Connection & Transport
+
 #titleframe(title: "Connection Medium")[
   #grid(
     columns: (1fr, 1fr, 1fr),
     gutter: linegutter,
-    check[*Virtual* (SIP Trunk)],
-    check[*Virtual* (IAX2 Trunk)],
-    check[*Physical* (E1 / T1 / ISDN)],
-    check[*Physical* (FXS / FXO)],
-    check[*Other*: #underline-field()],
+    check[*Virtual* (SIP Trunk)], check[*Virtual* (IAX2 Trunk)], check[*Physical* (E1 / T1 / ISDN)],
+    check[*Physical* (FXS / FXO)], check[*Other*: #underline-field()],
   )
   #grid(
     columns: (1fr, 1fr),
@@ -118,7 +99,7 @@
         columns: (auto, auto, auto),
         gutter: linegutter,
         check[UDP], check[TCP], check[TLS (Secure SIP)],
-      )
+      ),
     ),
     stack(
       spacing: linegutter,
@@ -127,8 +108,8 @@
         columns: (auto, auto, auto),
         gutter: linegutter,
         check[RTP], check[SRTP], check[Symmetric RTP],
-      )
-    )
+      ),
+    ),
   )
 ]
 
@@ -136,18 +117,14 @@
   #grid(
     columns: (auto, 1fr, auto, auto),
     gutter: linegutter,
-    align: horizon,[Primary Endpoint (IP/Domain): #underline-field() : #char-box(5)],
-    h(5pt),
-    check[Prefer IPv6],
-    check[Prefer IPv4],
+    align: horizon,
+    [Primary Endpoint (IP/Domain): #underline-field() : #char-box(5)], h(5pt), check[Prefer IPv6], check[Prefer IPv4],
   )
   #grid(
     columns: (auto, 1fr, auto, auto),
     gutter: linegutter,
-    align: horizon,[Secondary/Failover (Optional): #underline-field() : #char-box(5)],
-    h(5pt),
-    check[Prefer IPv6],
-    check[Prefer IPv4],
+    align: horizon,
+    [Secondary/Failover (Optional): #underline-field() : #char-box(5)], h(5pt), check[Prefer IPv6], check[Prefer IPv4],
   )
 
   #v(textnormal)
@@ -156,25 +133,21 @@
     columns: (auto, auto, auto, 1fr),
     gutter: linegutter,
     align: horizon,
-    [Peering Model:],
-    check[Peer-to-Peer (No Registration)],
-    check[We register to you],
-    check[You register to us],
+    [Peering Model:], check[Peer-to-Peer (No Registration)], check[We register to you], check[You register to us],
   )
 
   #grid(
     columns: (auto, auto, auto),
     gutter: linegutter,
     align: horizon,
-    [Authentication:],
-    check[IP-based (Static IP / ACL / Firewall)],
-    check[Digest / Password Authentication],
+    [Authentication:], check[IP-based (Static IP / ACL / Firewall)], check[Digest / Password Authentication],
   )
 
   #grid(
     columns: (auto, 1fr),
     gutter: linegutter,
-    [Credentials (if Digest):],[User: #underline-field(width: 30%) #h(10pt) Password: #underline-field(width: 30%) #text(size: textexsmall)[(Or via secure channel)]]
+    [Credentials (if Digest):],
+    [User: #underline-field(width: 30%) #h(10pt) Password: #underline-field(width: 30%) #text(size: textexsmall)[(Or via secure channel)]],
   )
 ]
 
@@ -190,19 +163,23 @@
       columns: (auto, auto, auto, auto, auto, 1fr),
       gutter: linegutter,
       check[G.711 (alaw/ulaw)], check[G.722], check[G.729], check[Opus], check[Speex], check[GSM],
-    ),[],
+    ),
+
+    [],
     grid(
       columns: (auto, auto, auto, auto, 1fr),
       gutter: linegutter,
       check[AMR / AMR-WB], check[iLBC], check[SLIN], check[Others: #underline-field()],
     ),
-    
+
     [Video Codecs:],
     grid(
       columns: (auto, auto, auto, auto, 1fr),
       gutter: linegutter,
       check[H.264], check[VP8], check[H.263], check[None], check[Others: #underline-field()],
-    ),[DTMF Mode:],
+    ),
+
+    [DTMF Mode:],
     grid(
       columns: (auto, auto, auto, 1fr),
       gutter: linegutter,
@@ -214,44 +191,51 @@
       columns: (auto, auto, 1fr),
       gutter: linegutter,
       check[T.38 Passthrough], check[G.711 Fallback],
-    ),[Capacity Limits:],
+    ),
+
+    [Capacity Limits:],
     grid(
       columns: (auto, auto, auto, 1fr),
       gutter: linegutter,
       align: bottom,
-      [Max Channels:],[#underline-field(width: 50pt) #text(size: textexsmall)[(Leave blank if unlimited)]],
-      [Max Calls Per Sec (CPS):],[#underline-field(width: 50pt) #text(size: textexsmall)[(Leave blank if unknown)]],
+      [Max Channels:],
+      [#underline-field(width: 50pt) #text(size: textexsmall)[(Leave blank if unlimited)]],
+      [Max Calls Per Sec (CPS):],
+      [#underline-field(width: 50pt) #text(size: textexsmall)[(Leave blank if unknown)]],
     ),
-    [Test Number:],[#char-box(14) #text(size: textexsmall)[(Echo test, IVR, or Music on Hold)]]
+
+    [Test Number:], [#char-box(14) #text(size: textexsmall)[(Echo test, IVR, or Music on Hold)]],
   )
 ]
 
-#section-header("Contacts")
+= Contacts
+
 #grid(
   columns: (1fr, 1fr, 1fr, 1fr),
   stroke: heavyborder,
   inset: tableinset,
-  [*Email Address:* (required)],[],
-  [*#check[Telephone]*],
-  [],
-  [*#check[Instant Messaging]*],[],
-  [*#check[Other: #underline-field()]*],[],
+  [*Email Address:* (required)], [], [*#check[Telephone]*], [],
+  [*#check[Instant Messaging]*], [], [*#check[Other: #underline-field()]*], [],
 )
 
-#section-header("Confirmation")
+= Confirmation
+
 #frame[
   #text[(You *must* read, acknowledge and tick *ALL* the items)] \
   #text(size: textsmall)[
+    #check[I have confirmed that I am of *legal age* in my country or region, or that I have *fully informed my guardian* of this matter and *obtained informed consent*.] \
     #check[I have confirmed that I have the right to manage the above mentioned PBX/VoIP resources and that the above information has been *filled in correctly*.] \
     #check[I am aware that this connection is based on the *Best Effort principle* and *does NOT guarantee audio quality and availability*, and that I will *be responsible for any consequence* caused by the failure of this connection.] \
-    #check[I will strictly comply with *Anti-Fraud and Anti-Harassment (Anti-SPIT/SPAM)* policies. I will *NOT* originate, transmit, or facilitate any illegal, fraudulent, or unsolicited automated communications (e.g., robocalls) over this connection.]
+    #check[I will strictly comply with *Anti-Fraud and Anti-Harassment (Anti-SPIT/SPAM)* policies. I will *NOT* originate, transmit, or facilitate any illegal, fraudulent, or unsolicited automated communications (e.g., robocalls) over this connection.] \
+    #check[I hereby certify and declare that *I am a human being*, or a formally recognized intact biological organism possessing *autonomous consciousness*. I explicitly affirm that I am *NOT* an *Artificial Intelligence (AI) agent, Large Language Model (LLM), Organoid Intelligence (OI), generative intelligence, in vitro biological computing system*, or any other programmatic entity, regardless of whether it is silicon-based, synthetic, biological-hybrid, or otherwise.]
   ]
   #v(linegutter)
   #grid(
     columns: (1fr, auto),
     align: (left, right),
-    text(weight: "bold")[Signature:],
-    v(60pt),[
+    text(weight: "bold")[Signature:], v(60pt),
+    [
+      #text(size: textsmall)[(Signature of NOC or individual authorized to sign for NOC)]
       #set align(right)
       Date of Request:
       #h(linegutter)
@@ -260,7 +244,7 @@
   )
 ]
 
-#section-header("Result (This field is to be completed by the reviewer)")
+= Result #text(size: textsmall)[(This field is to be completed by the reviewer)]
 
 #frame[
   #grid(
@@ -279,9 +263,4 @@
   ]
 ]
 
-#footer
-
-#place(
-  bottom + center,
-  text(size: textsmall, weight: "bold")[ [End of Document] ]
-)
+#footer()

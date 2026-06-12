@@ -1,31 +1,10 @@
 #import "template.typ": *
+#show: apply-template.with(formcode: "420N")
 
 #set document(title: [Network Peering Request])
 
-#set page(
-  paper: "a4",
-  margin: (x: 0.8cm, y: 0.8cm, top: 3cm),
-  header: context [
-    #grid(
-      columns: (1fr, auto, 1fr),
-      align: (left, center, right),
-      [[Page #counter(page).display()]], title(), [( Version #version )],
-    )
-    #align(center)[Only used for *#ownas.join("/")*]
-  ],
-  background: [
-    #if preview [
-      #rotate(24deg, [
-        #text(128pt, fill: rgb("CCCCCC"))[*PREVIEW*]
-        #text(48pt, fill: rgb("CCCCCC"))[*Not For Production*]
-      ])
-    ]
-  ],
-)
+= Registry
 
-#set text(font: globalfont, size: textnormal, lang: "en")
-
-#section-header("Registry")
 #titleframe(
   title: "Internet Registry",
   subtitle: "(If you need to select both, please submit two forms)",
@@ -46,7 +25,8 @@
   align(left + horizon, check[Tick if your ASN is 2-byte]),
 )
 
-#section-header("Location")
+= Location
+
 #frame(stroke: heavyborder)[
   #grid(
     columns: (auto, 1fr),
@@ -84,7 +64,8 @@
   )
 ]
 
-#section-header("Connection")
+= Connection
+
 #titleframe(title: "Type of Connection Medium")[
   #grid(
     columns: (1fr, 1fr, 1fr),
@@ -157,9 +138,11 @@
 
   #char-box(44)
   #grid(
-    columns: (auto, auto),
+    columns: (auto, auto, auto),
     gutter: linegutter,
-    [Options:], [Host Resolution: #text(size: textsmall)[(if hostname is used in endpoint)]],
+    [Options:],
+    [Host Resolution: #text(size: textsmall)[(if hostname is used in endpoint)]],
+    [MTU: #text(size: textsmall)[(if not 1420)]],
 
     check[Enable persistent keepalive: (seconds) #char-box(3)],
     grid(
@@ -167,6 +150,7 @@
       gutter: linegutter,
       check[Prefer IPv6], check[Prefer IPv4],
     ),
+    char-box(4),
   )
 
   #line(length: 100%, stroke: heavyborder)
@@ -264,7 +248,7 @@
   )
 ]
 
-#section-header("BGP Session")
+= BGP Session
 
 #grid(
   columns: (1fr, 3fr),
@@ -413,7 +397,7 @@
   ),
 )
 
-#section-header("Contacts")
+= Contacts
 #grid(
   columns: (1fr, 1fr, 1fr, 1fr),
   stroke: heavyborder,
@@ -422,13 +406,15 @@
   [*#check[Instant Messaging]*], [], [*#check[Other: #underline-field()]*], [],
 )
 
-#section-header("Confirmation")
+= Confirmation
 #frame[
   #text[(You *must* read, acknowledge and tick *ALL* the items)] \
   #text(size: textsmall)[
+    #check[I have confirmed that I am of *legal age* in my country or region, or that I have *fully informed my guardian* of this matter and *obtained informed consent*.] \
     #check[I have confirmed that I have the right to manage the above mentioned autonomous system and network resources and that the above information has been *filled in correctly*.] \
     #check[I am aware that this BGP session is based on the *Best Effort principle* and *does NOT guarantee connection stability and availability*, and that I will *be responsible for any consequence* caused by the failure of this BGP session.] \
-    #check[I will *NOT* arbitrarily *block, interfere, discriminate, obstruct or restrict* the right of *ANY* user to use, send, receive or offer any content, application or legal service over this connection.]
+    #check[I will *NOT* arbitrarily *block, interfere, discriminate, obstruct or restrict* the right of *ANY* user to use, send, receive or offer any content, application or legal service over this connection.] \
+    #check[I hereby certify and declare that *I am a human being*, or a formally recognized intact biological organism possessing *autonomous consciousness*. I explicitly affirm that I am *NOT* an *Artificial Intelligence (AI) agent, Large Language Model (LLM), Organoid Intelligence (OI), generative intelligence, in vitro biological computing system*, or any other programmatic entity, regardless of whether it is silicon-based, synthetic, biological-hybrid, or otherwise.]
   ]
   #v(linegutter)
   #grid(
@@ -436,6 +422,7 @@
     align: (left, right),
     text(weight: "bold")[Signature:], v(60pt),
     [
+      #text(size: textsmall)[(Signature of NOC or individual authorized to sign for NOC)]
       #set align(right)
       Date of Request #text(size: textexsmall)[(YYYY/MM/DD)]:
       #h(linegutter)
@@ -444,7 +431,7 @@
   )
 ]
 
-#section-header("Result (This field is to be completed by the reviewer)")
+= Result #text(size: textsmall)[(This field is to be completed by the reviewer)]
 
 #frame[
   #grid(
@@ -463,9 +450,4 @@
   ]
 ]
 
-#footer
-
-#place(
-  bottom + center,
-  text(size: textsmall, weight: "bold")[ [End of Document] ],
-)
+#footer()
