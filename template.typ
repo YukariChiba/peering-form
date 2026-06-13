@@ -26,15 +26,19 @@
   )
 }
 
-#let titleframe(body, title: "", subtitle: "", stroke: heavyborder, inset: tableinset) = {
+#let titleframe(body, title: "", subtitle: "", stroke: heavyborder, inset: tableinset, showframe: true) = {
   stack(
+    spacing: linegutter,
     grid(
       columns: (auto, 1fr),
       gutter: linegutter,
       text(weight: "bold")[#title], text(size: textsmall)[#subtitle],
     ),
-    spacing: linegutter,
-    frame(stroke: stroke, inset: inset)[
+    if showframe == true [
+      #frame(stroke: stroke, inset: inset)[
+        #body
+      ]
+    ] else [
       #body
     ],
   )
@@ -117,7 +121,8 @@
         align: (left + top, right + top),
         [
           #title()
-          [Only used for *#ownas.join("/")*]
+          #text(size: textexsmall)[Only used for *#ownas.join("/")*] \
+          #text(size: textexsmall)[_(Available at github.com/YukariChiba/peering-form)_]
         ],
         [
           #if formcode != none [*Form:* #text(size: 18pt)[*#formcode* \ ]]
@@ -143,7 +148,7 @@
   show title: it => block(
     text(size: 20pt, weight: "bold")[#it],
     above: 8pt,
-    below: 10pt,
+    below: 8pt,
   )
 
   show heading.where(level: 1): it => block(

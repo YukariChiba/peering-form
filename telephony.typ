@@ -254,8 +254,18 @@
     text(weight: "bold")[#check[Peering Rejected]],
   )
   #line(length: 100%, stroke: lightborder)
-  *Extra Message:*
-  #v(60pt)
+  #grid(
+    columns: (1fr, 1fr),
+    [
+      #text(weight: "bold")[Signature:]
+      #v(60pt - textnormal)
+    ],
+    [
+      *Extra Message:*
+      #v(60pt - textnormal)
+    ],
+  )
+  #text(size: textsmall)[(Signature of NOC or individual authorized to sign for NOC)]
   #align(right)[
     Date of Reply:
     #h(linegutter)

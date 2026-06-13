@@ -11,7 +11,7 @@
 #let linegutter = 8pt;
 #let tableinset = 8pt;
 
-#let version = "1.4.0 / Typst"
+#let version = "1.4.1 / Typst"
 
 #let ownas = ("AS4242421331", "AS4242421332", "AS4242420803", "AS207268")
 
