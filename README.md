@@ -11,7 +11,7 @@ A printable peering form built using [Typst](https://typst.app/).
 
 ### Customize
 
-This form can be customized by setting variables in `variable.typ`:
+This form can be customized by setting variables in `configs/variable.typ`:
 
 - `ownas`: Your ASN list (e.g., `("AS174", "AS6939")`).
 - `ownprefix`: Your telephony prefixes.
@@ -22,13 +22,11 @@ This form can be customized by setting variables in `variable.typ`:
 ### Build
 
 ```bash
-# this will generate `index.pdf`
-typst compile index.typ
-# this will generate `telephony.pdf`
-typst compile telephony.typ
+# this will generate `{form}.pdf`
+typst compile {form}.typ
 ```
 
-To build a version without preview watermark, edit `variable.typ` and set `#let preview = false`.
+To build a version without preview watermark, edit `configs/variable.typ` and set `#let preview = false`.
 
 ## License
 

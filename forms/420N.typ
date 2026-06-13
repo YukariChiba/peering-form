@@ -1,4 +1,4 @@
-#import "template.typ": *
+#import "../configs/template.typ": *
 #show: apply-template.with(formcode: "420N")
 
 #set document(title: [Network Peering Request])
