@@ -11,7 +11,7 @@
 )[
   #grid(
     columns: (2fr, 1fr),
-    check[*Telephony42* (DN42 / NeoNetwork / ICVPN / ChaosVPN / CRXN)], check[*ITU-T* (currently NOT supported)],
+    check[*Telephony42* (DN42 / NeoNetwork / ICVPN / ChaosVPN / CRXN)], check[*ITU-T*],
   )
 ]
 
@@ -22,8 +22,8 @@
   #grid(
     columns: 1fr,
     gutter: linegutter,
-    check[*Telephony42 Standard Draft* (+042-N-XXXX)],
-    check[*e164.dn42 (Will Deprecate Soon)* (424 + Network ID + ASN Last 4 digits)],
+    check[*Telephony42* (+042-N-XXXX)],
+    check[*e164.dn42 (Deprecated)* (424-0 + ASN Last 4 digits)],
     check[*Others / Custom Plan*: #underline-field()],
   )
 ]
@@ -50,9 +50,9 @@
     columns: 1fr,
     row-gutter: linegutter,
     align(left + horizon, grid(
-      columns: (auto, auto),
+      columns: (auto, auto, auto),
       gutter: linegutter,
-      [Tick if E.164 is configured for your prefix(es) via:], check[e164.dn42],
+      [Tick if E.164 is configured for your prefix(es) via:], check[Telephony42 (tel.dn42)], check[e164.dn42 (deprecated)],
     )),
     align(left + horizon, check[Tick if E.164 is configured for your prefix(es) via custom domain: #underline-field()])
   )

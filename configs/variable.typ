@@ -11,15 +11,15 @@
 #let linegutter = 8pt;
 #let tableinset = 8pt;
 
-#let version = "1.4.2 / Typst"
+#let version = "1.4.3 / Typst"
 
 #let ownas = ("AS4242421331", "AS4242421332", "AS4242420803", "AS207268")
 
 #let ownprefix = (
   (
     title: [Main PBX \@ wh1.cn],
-    prefixes: (42400803, 42401331),
-    description: "(E.164 configured @ e164.dn42)",
+    prefixes: ("+042-4-0803",),
+    description: "(E.164 configured @ tel.dn42)",
   ),
 )
 
