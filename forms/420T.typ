@@ -23,7 +23,7 @@
     columns: 1fr,
     gutter: linegutter,
     check[*Telephony42* (+042-N-XXXX)],
-    check[*e164.dn42 (Deprecated)* (424-0 + ASN Last 4 digits)],
+    check[*e164.dn42 (Deprecated)* (+424-0 + ASN Last 4 digits)],
     check[*Others / Custom Plan*: #underline-field()],
   )
 ]
@@ -52,7 +52,9 @@
     align(left + horizon, grid(
       columns: (auto, auto, auto),
       gutter: linegutter,
-      [Tick if E.164 is configured for your prefix(es) via:], check[Telephony42 (tel.dn42)], check[e164.dn42 (deprecated)],
+      [Tick if E.164 is configured for your prefix(es) via:],
+      check[Telephony42 (tel.dn42)],
+      check[e164.dn42 (deprecated)],
     )),
     align(left + horizon, check[Tick if E.164 is configured for your prefix(es) via custom domain: #underline-field()])
   )

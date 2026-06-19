@@ -29,6 +29,6 @@
 
 #let footertext = [
   Please return completed form to: \
-  *Fax (PSTN):* +1-424-242-9915 #h(1em) *Fax (Telephony42):* +424-0-0803-4001 \
+  *Fax (PSTN):* +1-424-242-9915 #h(1em) *Fax (Telephony42):* +042-4-0803-4001 \
   *IANA Global:* peering\@strexp.net #h(1em) *DN42 Global:* peering\@nia.dn42 #h(1em) *DN42 China:* peering\@gensokyo.dn42
 ]
